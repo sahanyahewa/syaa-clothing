@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Syaa Clothing – Follow Us</title>
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; min-height: 100vh; overflow-x: hidden; }
+    body { font-family: 'Rajdhani', sans-serif; }
+
+    /* ── Background canvas fixed behind everything ── */
+    #bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+    }
+
+    /* ── Page layout ── */
+    .page {
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 52px 20px 60px;
+    }
+
+    /* ── Title ── */
+    .title {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: clamp(52px, 14vw, 100px);
+      letter-spacing: 0.18em;
+      color: #0a1a5c;
+      text-align: center;
+      line-height: 1;
+      margin-bottom: 8px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.10);
+      animation: fadeDown 0.8s ease both;
+    }
+    .subtitle {
+      font-size: clamp(9px, 2.6vw, 13px);
+      letter-spacing: 0.34em;
+      color: #0a2550;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: clamp(36px, 8vw, 56px);
+      opacity: 0;
+      animation: fadeDown 0.8s 0.12s ease forwards;
+    }
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Cards ── */
+    .cards {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(18px, 4.5vw, 30px);
+      width: 100%;
+      max-width: 490px;
+    }
+
+    .card-link {
+      display: block;
+      text-decoration: none;
+      cursor: pointer;
+      opacity: 0;
+      animation: fadeUp 0.65s ease forwards;
+      -webkit-tap-highlight-color: transparent;
+      transition: transform 0.15s ease;
+    }
+    .card-link:active { transform: scale(0.96); }
+    .card-link:nth-child(1) { animation-delay: 0.20s; }
+    .card-link:nth-child(2) { animation-delay: 0.33s; }
+    .card-link:nth-child(3) { animation-delay: 0.46s; }
+    .card-link:nth-child(4) { animation-delay: 0.59s; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Aceternity glow wrapper ── */
+    .glow-wrap {
+      position: relative;
+      padding: 3px;
+      border-radius: 999px;
+      width: 100%;
+    }
+    .glow-border, .glow-blur {
+      position: absolute;
+      inset: 0;
+      border-radius: 999px;
+      background-size: 400% 400%;
+      animation: glowShift 5s ease infinite alternate;
+    }
+    .glow-border { z-index: 1; }
+    .glow-blur   { z-index: 0; filter: blur(14px); opacity: 0.65; inset: -2px; transition: opacity 0.3s, filter 0.3s; }
+    .card-link:hover .glow-blur { opacity: 1; filter: blur(20px); }
+
+    @keyframes glowShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .g-tiktok {
+      background: radial-gradient(circle at 0% 100%,#00ccb1,transparent 50%),
+                  radial-gradient(circle at 100% 0%,#ff4088,transparent 50%),
+                  radial-gradient(circle at 100% 100%,#ffc414,transparent 50%),
+                  radial-gradient(circle at 0% 0%,#1ca0fb,#141316);
+    }
+    .g-insta {
+      background: radial-gradient(circle at 0% 100%,#f09433,transparent 50%),
+                  radial-gradient(circle at 100% 0%,#e6683c,transparent 50%),
+                  radial-gradient(circle at 100% 100%,#dc2743,transparent 50%),
+                  radial-gradient(circle at 0% 0%,#cc2366,#bc1888);
+    }
+    .g-whatsapp {
+      background: radial-gradient(circle at 0% 100%,#25d366,transparent 50%),
+                  radial-gradient(circle at 100% 0%,#128c7e,transparent 50%),
+                  radial-gradient(circle at 100% 100%,#075e54,transparent 50%),
+                  radial-gradient(circle at 0% 0%,#34b7f1,#1da462);
+    }
+    .g-facebook {
+      background: radial-gradient(circle at 0% 100%,#42a5f5,transparent 50%),
+                  radial-gradient(circle at 100% 0%,#4267b2,transparent 50%),
+                  radial-gradient(circle at 100% 100%,#166fe5,transparent 50%),
+                  radial-gradient(circle at 0% 0%,#1877f2,#0d47a1);
+    }
+
+    /* ── Card inner row ── */
+    .card-inner {
+      position: relative; z-index: 2;
+      display: flex; align-items: center;
+      width: 100%; border-radius: 999px; overflow: visible;
+    }
+
+    /* ── Icon circle ── */
+    .icon-circle {
+      width: clamp(64px,16vw,86px);
+      height: clamp(64px,16vw,86px);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      position: relative; z-index: 3;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.30);
+    }
+    .icon-circle svg { width: 42%; height: 42%; fill: white; filter: drop-shadow(0 1px 4px rgba(0,0,0,0.3)); }
+
+    .ic-tiktok   { background:#000; outline:3px solid rgba(255,64,136,.85); outline-offset:2px; }
+    .ic-insta    { background:radial-gradient(circle at 30% 110%,#ffdb00,#f70 25%,#ee2a7b 50%,#6228d7 85%); outline:3px solid rgba(255,200,0,.7); outline-offset:2px; }
+    .ic-whatsapp { background:#25d366; outline:3px solid rgba(150,255,150,.7); outline-offset:2px; }
+    .ic-facebook { background:#1877f2; outline:3px solid rgba(100,180,255,.7); outline-offset:2px; }
+
+    /* ── Label bar ── */
+    .label-bar {
+      flex: 1;
+      height: clamp(46px,11.5vw,58px);
+      border-radius: 999px;
+      display: flex; align-items: center;
+      padding-right: 22px;
+      margin-left: -28px;
+      padding-left: 36px;
+      color: white;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: clamp(14px,3.8vw,21px);
+      letter-spacing: 0.07em;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.15);
+    }
+    .lb-tiktok   { background:linear-gradient(90deg,#111 0%,#222 100%); border:2px solid rgba(255,64,136,.65); }
+    .lb-insta    { background:linear-gradient(90deg,#ee2a7b 0%,#f77737 55%,#feda77 100%); border:2px solid rgba(255,150,50,.6); }
+    .lb-whatsapp { background:linear-gradient(90deg,#1a7a3d 0%,#25a845 100%); border:2px solid rgba(80,200,80,.55); }
+    .lb-facebook { background:linear-gradient(90deg,#0c5bc0 0%,#1877f2 100%); border:2px solid rgba(80,140,255,.55); }
+
+    /* ── Footer ── */
+    .footer {
+      margin-top: clamp(32px,7vw,52px);
+      font-size: 11px; letter-spacing: 0.22em;
+      color: rgba(10,30,90,0.5);
+      text-align: center; font-weight: 700;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.72s ease forwards;
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="bg"></canvas>
+
+  <main class="page">
+    <h1 class="title">FOLLOW US</h1>
+    <p class="subtitle">ON OUR SOCIAL MEDIA CHANNELS</p>
+
+    <div class="cards">
+
+      <!-- TikTok -->
+      <a class="card-link" href="https://www.tiktok.com/@syaa.clothing" target="_blank" rel="noopener noreferrer">
+        <div class="glow-wrap">
+          <div class="glow-blur g-tiktok"></div>
+          <div class="glow-border g-tiktok"></div>
+          <div class="card-inner">
+            <div class="icon-circle ic-tiktok">
+              <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.17 8.17 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z"/></svg>
+            </div>
+            <div class="label-bar lb-tiktok">syaa.clothing</div>
+          </div>
+        </div>
+      </a>
+
+      <!-- Instagram -->
+      <a class="card-link" href="https://www.instagram.com/syaa_clothing_" target="_blank" rel="noopener noreferrer">
+        <div class="glow-wrap">
+          <div class="glow-blur g-insta"></div>
+          <div class="glow-border g-insta"></div>
+          <div class="card-inner">
+            <div class="icon-circle ic-insta">
+              <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </div>
+            <div class="label-bar lb-insta">syaa_clothing_</div>
+          </div>
+        </div>
+      </a>
+
+      <!-- WhatsApp -->
+      <a class="card-link" href="https://wa.me/94771760809" target="_blank" rel="noopener noreferrer">
+        <div class="glow-wrap">
+          <div class="glow-blur g-whatsapp"></div>
+          <div class="glow-border g-whatsapp"></div>
+          <div class="card-inner">
+            <div class="icon-circle ic-whatsapp">
+              <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </div>
+            <div class="label-bar lb-whatsapp">+94 77 176 0809</div>
+          </div>
+        </div>
+      </a>
+
+      <!-- Facebook -->
+      <a class="card-link" href="https://www.facebook.com/share/17fPpeKf8p/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">
+        <div class="glow-wrap">
+          <div class="glow-blur g-facebook"></div>
+          <div class="glow-border g-facebook"></div>
+          <div class="card-inner">
+            <div class="icon-circle ic-facebook">
+              <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </div>
+            <div class="label-bar lb-facebook">Syaa Clothing</div>
+          </div>
+        </div>
+      </a>
+
+    
+
+  <script>
+  // ═══════════════════════════════════════════════════════
+  //  BACKGROUND GRADIENT ANIMATION
+  //  Pure canvas — works on ALL phones (Android & iPhone)
+  //  Exact same look as Aceternity BackgroundGradientAnimation
+  // ═══════════════════════════════════════════════════════
+  const canvas = document.getElementById('bg');
+  const ctx    = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // ── Blobs: same style as screenshot ──
+  // Dark navy base + large soft glowing blobs floating slowly
+  // Colours: flyer cyan/teal/green/lime (not the purple from screenshot)
+  // Speed: period 12000–18000ms = smooth medium float (not too fast, not too slow)
+  const blobs = [
+    { ox:0.25, oy:0.25, r:[0, 240, 255],   period:7000, ax:0.20, ay:0.30, pa:0.0  },  // bright cyan — flyer top
+    { ox:0.80, oy:0.35, r:[0, 255, 200],   period:6000, ax:0.18, ay:0.22, pa:1.0  },  // cyan-green
+    { ox:0.20, oy:0.75, r:[0, 255, 120],   period:9000, ax:0.22, ay:0.18, pa:2.5  },  // bright green
+    { ox:0.60, oy:0.60, r:[0, 255, 180],   period:7000, ax:0.28, ay:0.12, pa:4.0  },  // teal
+    { ox:0.75, oy:0.20, r:[120, 255, 0],   period:8000, ax:0.15, ay:0.25, pa:3.2  },  // lime — flyer bottom
+  ];
+
+  function draw(ts) {
+    const W = canvas.width;
+    const H = canvas.height;
+    const base = Math.max(W, H);
+
+    // Base — flyer top colour (dark enough for lighter blobs to glow)
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = '#003322';
+    ctx.fillRect(0, 0, W, H);
+
+    // ── Step 2: Glowing blobs — 'lighter' composite ──
+    ctx.globalCompositeOperation = 'lighter';
+
+    blobs.forEach(b => {
+      const t = ts / b.period * Math.PI * 2 + b.pa;
+      const cx = (b.ox + Math.sin(t)         * b.ax) * W;
+      const cy = (b.oy + Math.sin(t * 0.713) * b.ay) * H;
+      const radius = base * 0.38;
+      const [r,g,bl] = b.r;
+      const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
+      grad.addColorStop(0,    `rgba(${r},${g},${bl}, 0.95)`);
+      grad.addColorStop(0.20, `rgba(${r},${g},${bl}, 0.65)`);
+      grad.addColorStop(0.50, `rgba(${r},${g},${bl}, 0.28)`);
+      grad.addColorStop(0.80, `rgba(${r},${g},${bl}, 0.07)`);
+      grad.addColorStop(1,    `rgba(${r},${g},${bl}, 0)`);
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    // ── Step 3: Flyer colour tint overlay — corners ටිකත් cover වෙන්න opacity වැඩි කළා ──
+    ctx.globalCompositeOperation = 'source-over';
+    const tint = ctx.createLinearGradient(0, 0, W, H);
+    tint.addColorStop(0,   'rgba(0, 229, 255, 0.72)');
+    tint.addColorStop(0.4, 'rgba(0, 207, 170, 0.62)');
+    tint.addColorStop(0.7, 'rgba(0, 230, 118, 0.65)');
+    tint.addColorStop(1,   'rgba(118, 255, 3, 0.68)');
+    ctx.fillStyle = tint;
+    ctx.fillRect(0, 0, W, H);
+
+    ctx.globalCompositeOperation = 'source-over';
+    requestAnimationFrame(draw);
+  }
+
+  requestAnimationFrame(draw);
+  </script>
+
+</body>
+</html>
