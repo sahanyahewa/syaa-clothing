@@ -147,6 +147,7 @@ No npm, no React, no dependencies — pure HTML/CSS/JS.
 - WhatsApp: +94 77 176 0809
 - Instagram: [@syaa_clothing_](https://www.instagram.com/syaa_clothing_)
 - TikTok: [@syaa.clothing](https://www.tiktok.com/@syaa.clothing)
+- facebook: [@Syaa Clothing](https://www.facebook.com/share/17fPpeKf8p/?mibextid=wwXIfr)
 
 ---
 
